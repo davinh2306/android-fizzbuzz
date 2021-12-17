@@ -11,5 +11,5 @@
     <string name="form_buzz">Replace Buzz by…</string>
     <string name="form_cta">Confirm</string>
 
-    <string name="result_title">Result</string>
+    <string name="result_title">List of results</string>
 </resources>

@@ -26,18 +26,18 @@ class ResultActivity : AppCompatActivity() {
 
         fun newIntent(
             context: Context,
-            limit: Int,
-            firstMultiple: Int,
-            secondMultiple: Int,
-            fizz: String,
-            buzz: String
+            limit: Int?,
+            firstMultiple: Int?,
+            secondMultiple: Int?,
+            fizz: String?,
+            buzz: String?
         ) = Intent(context, ResultActivity::class.java)
             .apply {
-                putExtra(EXTRA_LIMIT, limit)
-                putExtra(EXTRA_FIRST_MULTIPLE, firstMultiple)
-                putExtra(EXTRA_SECOND_MULTIPLE, secondMultiple)
-                putExtra(EXTRA_FIZZ, fizz)
-                putExtra(EXTRA_BUZZ, buzz)
+                putExtra(EXTRA_LIMIT, limit ?: DEFAULT_LIMIT)
+                putExtra(EXTRA_FIRST_MULTIPLE, firstMultiple ?: DEFAULT_FIRST_MULTIPLE)
+                putExtra(EXTRA_SECOND_MULTIPLE, secondMultiple ?: DEFAULT_SECOND_MULTIPLE)
+                putExtra(EXTRA_FIZZ, fizz ?: DEFAULT_FIZZ)
+                putExtra(EXTRA_BUZZ, buzz ?: DEFAULT_BUZZ)
             }
     }
 

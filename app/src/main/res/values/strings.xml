@@ -7,8 +7,13 @@
     <string name="form_limit">Enter the limit of the FizzBuzz</string>
     <string name="form_first_multiple">Enter your 1st multiple</string>
     <string name="form_second_multiple">Enter your 2nd multiple</string>
-    <string name="form_fizz">Replace Fizz by…</string>
-    <string name="form_buzz">Replace Buzz by…</string>
+    <string name="form_fizz">Choose your 1st string</string>
+    <string name="form_buzz">Choose your 2nd string</string>
+    <string name="form_limit_default">Default : 100</string>
+    <string name="form_first_multiple_default">Default : 3</string>
+    <string name="form_second_multiple_default">Default : 5</string>
+    <string name="form_fizz_default">Default : Fizz</string>
+    <string name="form_buzz_default">Default : Buzz</string>
     <string name="form_cta">Confirm</string>
 
     <string name="result_title">List of results</string>

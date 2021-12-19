@@ -35,7 +35,7 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/background_edit"
+                android:background="@drawable/background_alpha"
                 app:layout_constraintBottom_toBottomOf="@+id/form_second_multiple_input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,8 @@
                 android:hint="@string/form_limit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_number">
+                app:layout_constraintTop_toBottomOf="@+id/form_number"
+                app:suffixText="@string/form_limit_default">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_limit_input_edit"
@@ -79,7 +80,8 @@
                 android:hint="@string/form_first_multiple"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_limit_input_layout">
+                app:layout_constraintTop_toBottomOf="@+id/form_limit_input_layout"
+                app:suffixText="@string/form_first_multiple_default">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_first_multiple_input_edit"
@@ -98,7 +100,8 @@
                 android:hint="@string/form_second_multiple"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_first_multiple_input_layout">
+                app:layout_constraintTop_toBottomOf="@+id/form_first_multiple_input_layout"
+                app:suffixText="@string/form_second_multiple_default">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_second_multiple_input_edit"
@@ -112,7 +115,7 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/background_edit"
+                android:background="@drawable/background_alpha"
                 app:layout_constraintBottom_toBottomOf="@+id/form_buzz_input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +140,8 @@
                 android:hint="@string/form_fizz"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_text">
+                app:layout_constraintTop_toBottomOf="@+id/form_text"
+                app:suffixText="@string/form_fizz_default">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_fizz_input_edit"
@@ -156,7 +160,8 @@
                 android:hint="@string/form_buzz"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_fizz_input_layout">
+                app:layout_constraintTop_toBottomOf="@+id/form_fizz_input_layout"
+                app:suffixText="@string/form_buzz_default">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_buzz_input_edit"
@@ -173,10 +178,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/form_cta"
+        style="@style/FizzBuzzCta"
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:text="@string/form_cta"
-        style="@style/FizzBuzzCta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

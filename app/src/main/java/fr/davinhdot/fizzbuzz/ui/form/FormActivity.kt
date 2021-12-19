@@ -1,9 +1,12 @@
 package fr.davinhdot.fizzbuzz.ui.form
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import fr.davinhdot.fizzbuzz.databinding.ActivityFormBinding
 import fr.davinhdot.fizzbuzz.ui.result.ResultActivity
+import fr.davinhdot.fizzbuzz.util.trimmedIntOrNull
+import fr.davinhdot.fizzbuzz.util.trimmedTextOrNull
 import timber.log.Timber
 
 class FormActivity : AppCompatActivity() {
@@ -24,9 +27,16 @@ class FormActivity : AppCompatActivity() {
     private fun initForm() {
         Timber.d("initForm")
 
-        // TODO : only digits for limit and multiples
-
         binding.formCta.setOnClickListener { goToResult() }
+
+        binding.formBuzzInputEdit.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                goToResult()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun goToResult() {
@@ -35,12 +45,12 @@ class FormActivity : AppCompatActivity() {
         startActivity(
             ResultActivity.newIntent(
                 context = this@FormActivity,
-                limit = binding.formLimitInputEdit.text.toString().trim().toInt(),
-                firstMultiple = binding.formFirstMultipleInputEdit.text.toString().trim().toInt(),
-                secondMultiple = binding.formSecondMultipleInputEdit.text.toString().trim().toInt(),
-                fizz = binding.formFizzInputEdit.text.toString().trim(),
-                buzz = binding.formBuzzInputEdit.text.toString().trim()
-                )
+                limit = binding.formLimitInputEdit.trimmedIntOrNull,
+                firstMultiple = binding.formFirstMultipleInputEdit.trimmedIntOrNull,
+                secondMultiple = binding.formSecondMultipleInputEdit.trimmedIntOrNull,
+                fizz = binding.formFizzInputEdit.trimmedTextOrNull,
+                buzz = binding.formBuzzInputEdit.trimmedTextOrNull
+            )
         )
     }
 }

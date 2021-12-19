@@ -22,62 +22,54 @@ class FizzBuzzUnitTest {
 
 
     @Test
-    fun multiplesOfFirstMultipleOnlyReturnsFizz() {
-        val divisibleByFirstMultipleOnly = (start..limit)
+    fun firstMultipleOnlyReturnsFizz() {
+        val divisibleNumberByFirstMultipleOnlyNotReturningFizz = (start..limit)
             .filter {
                 it % DEFAULT_FIRST_MULTIPLE == 0 && it % DEFAULT_SECOND_MULTIPLE != 0
             }
-
-        val result = divisibleByFirstMultipleOnly
             .firstOrNull {
                 fizzBuzz.getResult(it) != DEFAULT_FIZZ
             }
 
-        assertNull(result)
+        assertNull(divisibleNumberByFirstMultipleOnlyNotReturningFizz)
     }
 
     @Test
-    fun multiplesOfSecondMultipleOnlyReturnsBuzz() {
-        val divisibleBySecondMultipleOnly = (start..limit)
+    fun secondMultipleOnlyReturnsBuzz() {
+        val divisibleNumberBySecondMultipleOnlyNotReturningBuzz = (start..limit)
             .filter {
                 it % DEFAULT_FIRST_MULTIPLE != 0 && it % DEFAULT_SECOND_MULTIPLE == 0
             }
-
-        val result = divisibleBySecondMultipleOnly
             .firstOrNull {
                 fizzBuzz.getResult(it) != DEFAULT_BUZZ
             }
 
-        assertNull(result)
+        assertNull(divisibleNumberBySecondMultipleOnlyNotReturningBuzz)
     }
 
     @Test
-    fun multiplesOfFirstAndSecondMultipleReturnsFizzBuzz() {
-        val divisibleByFirstAndSecondMultiple = (start..limit)
+    fun firstAndSecondMultipleReturnsFizzBuzz() {
+        val divisibleNumberByFirstAndSecondMultipleNotReturningFizzBuzz = (start..limit)
             .filter {
                 it % DEFAULT_FIRST_MULTIPLE == 0 && it % DEFAULT_SECOND_MULTIPLE == 0
             }
-
-        val result = divisibleByFirstAndSecondMultiple
             .firstOrNull {
                 fizzBuzz.getResult(it) != "$DEFAULT_FIZZ$DEFAULT_BUZZ"
             }
 
-        assertNull(result)
+        assertNull(divisibleNumberByFirstAndSecondMultipleNotReturningFizzBuzz)
     }
 
     @Test
-    fun notMultiplesOfFirstAndSecondMultipleReturnsNumber() {
-        val notDivisibleByFirstAndSecondMultiple = (start..limit)
+    fun notFirstAndSecondMultipleReturnsNumber() {
+        val notDivisibleByFirstAndSecondMultipleNotReturningNumber = (start..limit)
             .filter {
                 it % DEFAULT_FIRST_MULTIPLE != 0 && it % DEFAULT_SECOND_MULTIPLE != 0
             }
-
-        val result = notDivisibleByFirstAndSecondMultiple
             .firstOrNull {
                 fizzBuzz.getResult(it) != it.toString()
             }
 
-        assertNull(result)
+        assertNull(notDivisibleByFirstAndSecondMultipleNotReturningNumber)
     }
 }

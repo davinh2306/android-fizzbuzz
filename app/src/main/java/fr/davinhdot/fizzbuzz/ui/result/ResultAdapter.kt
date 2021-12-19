@@ -51,7 +51,6 @@ class ResultAdapter(
             val textDisplayed = "$resultPosition -> $result"
 
             itemView.findViewById<AppCompatTextView>(R.id.result_item).text = textDisplayed
-
         }
     }
 }

@@ -28,20 +28,19 @@
         <item name="android:paddingTop">4dp</item>
     </style>
 
-    <style name="FizzBuzzTextInputEditNumber">
+    <style name="FizzBuzzTextInputEdit">
         <item name="android:background">@color/transparent</item>
-        <item name="android:inputType">numberSigned</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:longClickable">false</item>
     </style>
 
-    <style name="FizzBuzzTextInputEditText">
-        <item name="android:background">@color/transparent</item>
+    <style name="FizzBuzzTextInputEditNumber" parent="FizzBuzzTextInputEdit">
+        <item name="android:inputType">numberSigned</item>
+    </style>
+
+    <style name="FizzBuzzTextInputEditText" parent="FizzBuzzTextInputEdit">
         <item name="android:inputType">text</item>
-        <item name="android:textColor">?attr/colorPrimary</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:longClickable">false</item>
     </style>
 
     <style name="FizzBuzzCta">

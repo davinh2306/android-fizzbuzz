@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.davinhdot.fizzbuzz.R
+import fr.davinhdot.fizzbuzz.util.getFizzBuzzResult
 import timber.log.Timber
 
 class ResultAdapter(
@@ -19,7 +20,12 @@ class ResultAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         Timber.d("onCreateViewHolder")
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_result, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(
+                R.layout.item_result,
+                parent,
+                false
+            )
 
         return ItemViewHolder(view)
     }
@@ -47,17 +53,16 @@ class ResultAdapter(
             fizz: String,
             buzz: String
         ) {
-            Timber.d("bind result at position $position")
+            Timber.d("bind result at list position $position")
 
-            // TODO : move it in another file
-            val result = when {
-                (position + 1) % firstMultiple == 0 && (position + 1) % secondMultiple == 0 -> "$fizz$buzz"
-                (position + 1) % secondMultiple == 0 -> buzz
-                (position + 1) % firstMultiple == 0 -> fizz
-                else -> position + 1
-            }
-
-            val textDisplayed = "${position + 1} -> $result"
+            val resultPosition = position + 1
+            val result = resultPosition.getFizzBuzzResult(
+                firstMultiple,
+                secondMultiple,
+                fizz,
+                buzz
+            )
+            val textDisplayed = "$resultPosition -> $result"
 
             itemView.findViewById<AppCompatTextView>(R.id.result_item).text = textDisplayed
 

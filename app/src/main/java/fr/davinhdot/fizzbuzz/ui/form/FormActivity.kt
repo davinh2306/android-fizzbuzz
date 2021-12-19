@@ -1,6 +1,7 @@
 package fr.davinhdot.fizzbuzz.ui.form
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import fr.davinhdot.fizzbuzz.databinding.ActivityFormBinding
@@ -11,7 +12,17 @@ import timber.log.Timber
 
 class FormActivity : AppCompatActivity() {
 
+    companion object {
+        private const val REGEX_NUMBER = "^[0-9]*\$"
+    }
+
     private lateinit var binding: ActivityFormBinding
+
+    private val numberFilter = InputFilter { source, _, _, _, _, _ ->
+        if (source.toString().matches(Regex(REGEX_NUMBER))) {
+            source.toString()
+        } else ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate")
@@ -26,6 +37,10 @@ class FormActivity : AppCompatActivity() {
 
     private fun initForm() {
         Timber.d("initForm")
+
+        binding.formLimitInputEdit.filters = arrayOf(numberFilter)
+        binding.formFirstMultipleInputEdit.filters = arrayOf(numberFilter)
+        binding.formSecondMultipleInputEdit.filters = arrayOf(numberFilter)
 
         binding.formCta.setOnClickListener { goToResult() }
 

@@ -6,15 +6,12 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.davinhdot.fizzbuzz.R
-import fr.davinhdot.fizzbuzz.util.getFizzBuzzResult
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz
 import timber.log.Timber
 
 class ResultAdapter(
     private val limit: Int,
-    private val firstMultiple: Int,
-    private val secondMultiple: Int,
-    private val fizz: String,
-    private val buzz: String
+    private val fizzBuzz: FizzBuzz
 ) : RecyclerView.Adapter<ResultAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -31,14 +28,11 @@ class ResultAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        Timber.d("onCreateViewHolder")
+        Timber.d("onBindViewHolder")
 
         holder.bind(
             position = position,
-            firstMultiple = firstMultiple,
-            secondMultiple = secondMultiple,
-            fizz = fizz,
-            buzz = buzz
+            fizzBuzz = fizzBuzz
         )
     }
 
@@ -48,20 +42,12 @@ class ResultAdapter(
 
         fun bind(
             position: Int,
-            firstMultiple: Int,
-            secondMultiple: Int,
-            fizz: String,
-            buzz: String
+            fizzBuzz: FizzBuzz
         ) {
             Timber.d("bind result at list position $position")
 
             val resultPosition = position + 1
-            val result = resultPosition.getFizzBuzzResult(
-                firstMultiple,
-                secondMultiple,
-                fizz,
-                buzz
-            )
+            val result = fizzBuzz.getResult(resultPosition)
             val textDisplayed = "$resultPosition -> $result"
 
             itemView.findViewById<AppCompatTextView>(R.id.result_item).text = textDisplayed

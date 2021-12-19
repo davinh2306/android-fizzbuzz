@@ -5,6 +5,11 @@ import android.text.InputFilter
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import fr.davinhdot.fizzbuzz.databinding.ActivityFormBinding
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_BUZZ
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_FIRST_MULTIPLE
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_FIZZ
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_SECOND_MULTIPLE
 import fr.davinhdot.fizzbuzz.ui.result.ResultActivity
 import fr.davinhdot.fizzbuzz.util.trimmedIntOrNull
 import fr.davinhdot.fizzbuzz.util.trimmedTextOrNull
@@ -13,13 +18,13 @@ import timber.log.Timber
 class FormActivity : AppCompatActivity() {
 
     companion object {
-        private const val REGEX_NUMBER = "^[0-9]*\$"
+        private const val REGEX_ONLY_NUMBER = "^[0-9]*\$"
     }
 
     private lateinit var binding: ActivityFormBinding
 
     private val numberFilter = InputFilter { source, _, _, _, _, _ ->
-        if (source.toString().matches(Regex(REGEX_NUMBER))) {
+        if (source.toString().matches(Regex(REGEX_ONLY_NUMBER))) {
             source.toString()
         } else ""
     }
@@ -61,10 +66,12 @@ class FormActivity : AppCompatActivity() {
             ResultActivity.newIntent(
                 context = this@FormActivity,
                 limit = binding.formLimitInputEdit.trimmedIntOrNull,
-                firstMultiple = binding.formFirstMultipleInputEdit.trimmedIntOrNull,
-                secondMultiple = binding.formSecondMultipleInputEdit.trimmedIntOrNull,
-                fizz = binding.formFizzInputEdit.trimmedTextOrNull,
-                buzz = binding.formBuzzInputEdit.trimmedTextOrNull
+                fizzBuzz = FizzBuzz(
+                    binding.formFirstMultipleInputEdit.trimmedIntOrNull ?: DEFAULT_FIRST_MULTIPLE,
+                    binding.formSecondMultipleInputEdit.trimmedIntOrNull ?: DEFAULT_SECOND_MULTIPLE,
+                    binding.formFizzInputEdit.trimmedTextOrNull ?: DEFAULT_FIZZ,
+                    binding.formBuzzInputEdit.trimmedTextOrNull ?: DEFAULT_BUZZ
+                )
             )
         )
     }

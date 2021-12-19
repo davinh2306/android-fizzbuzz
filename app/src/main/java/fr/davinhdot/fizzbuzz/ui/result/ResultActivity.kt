@@ -6,6 +6,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.davinhdot.fizzbuzz.databinding.ActivityResultBinding
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_BUZZ
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_FIRST_MULTIPLE
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_FIZZ
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_LIMIT
+import fr.davinhdot.fizzbuzz.entity.FizzBuzz.Companion.DEFAULT_SECOND_MULTIPLE
 import timber.log.Timber
 
 class ResultActivity : AppCompatActivity() {
@@ -13,41 +19,29 @@ class ResultActivity : AppCompatActivity() {
     companion object {
 
         private const val EXTRA_LIMIT = "extra_limit"
-        private const val EXTRA_FIRST_MULTIPLE = "extra_first_multiple"
-        private const val EXTRA_SECOND_MULTIPLE = "extra_second_multiple"
-        private const val EXTRA_FIZZ = "extra_fizz"
-        private const val EXTRA_BUZZ = "extra_buzz"
-
-        private const val DEFAULT_LIMIT = 100
-        private const val DEFAULT_FIRST_MULTIPLE = 3
-        private const val DEFAULT_SECOND_MULTIPLE = 5
-        private const val DEFAULT_FIZZ = "fizz"
-        private const val DEFAULT_BUZZ = "buzz"
+        private const val EXTRA_FIZZ_BUZZ = "extra_fizz_buzz"
 
         fun newIntent(
             context: Context,
             limit: Int?,
-            firstMultiple: Int?,
-            secondMultiple: Int?,
-            fizz: String?,
-            buzz: String?
+            fizzBuzz: FizzBuzz
         ) = Intent(context, ResultActivity::class.java)
             .apply {
                 putExtra(EXTRA_LIMIT, limit ?: DEFAULT_LIMIT)
-                putExtra(EXTRA_FIRST_MULTIPLE, firstMultiple ?: DEFAULT_FIRST_MULTIPLE)
-                putExtra(EXTRA_SECOND_MULTIPLE, secondMultiple ?: DEFAULT_SECOND_MULTIPLE)
-                putExtra(EXTRA_FIZZ, fizz ?: DEFAULT_FIZZ)
-                putExtra(EXTRA_BUZZ, buzz ?: DEFAULT_BUZZ)
+                putExtra(EXTRA_FIZZ_BUZZ, fizzBuzz)
             }
     }
 
     private lateinit var binding: ActivityResultBinding
 
     private var limit = DEFAULT_LIMIT
-    private var firstMultiple = DEFAULT_FIRST_MULTIPLE
-    private var secondMultiple = DEFAULT_SECOND_MULTIPLE
-    private var fizz = DEFAULT_FIZZ
-    private var buzz = DEFAULT_BUZZ
+
+    private var fizzBuzz = FizzBuzz(
+        DEFAULT_FIRST_MULTIPLE,
+        DEFAULT_SECOND_MULTIPLE,
+        DEFAULT_FIZZ,
+        DEFAULT_BUZZ
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("onCreate")
@@ -59,27 +53,29 @@ class ResultActivity : AppCompatActivity() {
 
         getExtras()
 
-        binding.resultList.apply {
-            adapter = ResultAdapter(
-                limit = limit,
-                firstMultiple = firstMultiple,
-                secondMultiple = secondMultiple,
-                fizz = fizz,
-                buzz = buzz
-            )
-            layoutManager = LinearLayoutManager(this@ResultActivity)
-        }
+        initAdapter()
     }
 
     private fun getExtras() {
         Timber.d("getExtras")
 
-        intent?.extras?.let {
-            limit = it.getInt(EXTRA_LIMIT)
-            firstMultiple = it.getInt(EXTRA_FIRST_MULTIPLE)
-            secondMultiple = it.getInt(EXTRA_SECOND_MULTIPLE)
-            fizz = it.getString(EXTRA_FIZZ, DEFAULT_FIZZ)
-            buzz = it.getString(EXTRA_BUZZ, DEFAULT_BUZZ)
+        intent?.extras?.let { bundle ->
+            limit = bundle.getInt(EXTRA_LIMIT)
+            bundle.getParcelable<FizzBuzz>(EXTRA_FIZZ_BUZZ)?.let { data ->
+                fizzBuzz = data
+            }
+        }
+    }
+
+    private fun initAdapter() {
+        Timber.d("initAdapter")
+
+        binding.resultList.apply {
+            adapter = ResultAdapter(
+                limit = limit,
+                fizzBuzz = fizzBuzz
+            )
+            layoutManager = LinearLayoutManager(this@ResultActivity)
         }
     }
 }
